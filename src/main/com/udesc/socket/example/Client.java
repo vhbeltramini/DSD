@@ -9,8 +9,8 @@ public class Client {
     public static void main(String argv[]) throws Exception {
         System.out.println("Creating connection");
 
-//        try (Socket conn = new Socket("10.60.182.60", 80);) {
-        try (Socket conn = new Socket("10.60.182.53", 80);) {
+//        try (Socket conn = new Socket("10.60.182.53", 80);) {
+        try (Socket conn = new Socket("10.60.89.169", 80);) {
             System.out.println("Connected");
             InputStream inputStream = conn.getInputStream();
 
