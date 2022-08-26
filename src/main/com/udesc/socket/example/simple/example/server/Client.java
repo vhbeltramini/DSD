@@ -18,11 +18,16 @@ public class Client {
 
         String test = "teste";
         String testResult;
+        String data;
         Pessoa pessoa;
 
-//        Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 //
-//        System.out.println("A pessoa a ser adicionada é 1:professora ou 2:aluno?");
+        System.out.println("Insira as informações");
+        testResult = scan.nextLine();
+
+
+
 //        int personType = Integer.parseInt(scan.nextLine());
 //        switch (personType) {
 //            case 1:
@@ -41,12 +46,12 @@ public class Client {
 
 
         System.out.println("Creating connection");
-        try (Socket conn = new Socket("10.60.89.169", 80);) {
+        try (Socket conn = new Socket("192.168.31.155", 80);) {
             System.out.println("Connected");
             InputStream inputStream = conn.getInputStream();
             DataOutputStream outToServer = new DataOutputStream(conn.getOutputStream());
 
-            outToServer.writeBytes(test + '\n');
+            outToServer.writeBytes(testResult + '\n');
 
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             testResult = inFromServer.readLine();

@@ -6,7 +6,7 @@ public abstract class Pessoa {
     private String nome;
     private String endereco;
 
-    protected Pessoa(Integer cpf, String nome, String endereco) {
+    public Pessoa(Integer cpf, String nome, String endereco) {
         this.cpf = cpf;
         this.nome = nome;
         this.endereco = endereco;
