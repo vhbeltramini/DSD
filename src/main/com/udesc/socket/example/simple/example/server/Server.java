@@ -37,20 +37,13 @@ public class Server {
 
         System.out.println("data:" + Arrays.toString(data));
 
-        switch (data[0]) {
-            case "CREATE":
-                if (handler.addPessoa(data)) {
-                    return "Pessoa Adicionada";
-                }
-                return "Err";
-            case "GET":
-                return handler.getPessoa(data);
-            case "UPDATE":
-            case "DELETE":
-            case "LIST":
-            default:
-                return "Not implemented";
-        }
-
+        return switch (data[0]) {
+            case "INSERT" -> handler.AddPessoa(data);
+            case "GET" -> handler.GetPessoa(data);
+            case "UPDATE" -> handler.UpdatePessoa(data);
+            case "DELETE" -> handler.DeletePessoa(data);
+            case "LIST" -> handler.ListPessoas();
+            default -> "Not implemented";
+        };
     }
 }

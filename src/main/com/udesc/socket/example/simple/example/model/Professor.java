@@ -8,4 +8,13 @@ public class Professor extends Pessoa {
 
     public Professor() {
     }
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "cpf=" + getCpf() +
+                ", nome='" + getNome() + '\'' +
+                ", endereco='" + getEndereco() + '\'' +
+                '}';
+    }
 }

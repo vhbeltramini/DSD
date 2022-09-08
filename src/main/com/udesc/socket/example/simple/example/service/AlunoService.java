@@ -8,13 +8,12 @@ public class AlunoService extends PessoaService {
     private AlunoDB db;
 
     public AlunoService() {
-        db = new AlunoDB();
+        db = AlunoDB.getInstance();
     }
 
     @Override
     protected boolean Crete(String[] data) {
-        db.Create((Aluno) formatPessoaData(ALUNO, data));
-        return false;
+        return db.Create((Aluno) formatPessoaData(ALUNO, data));
     }
 
     @Override
@@ -24,22 +23,21 @@ public class AlunoService extends PessoaService {
 
     @Override
     protected boolean Delete(String[] data) {
-
-        return false;
+        return db.Remove(Integer.parseInt(data[2]));
     }
 
     @Override
     protected boolean Update(String[] data) {
-        return false;
+        return db.Update((Aluno) formatPessoaData(ALUNO, data));
     }
 
     @Override
     protected boolean Remove(String[] data) {
-        return false;
+        return db.Remove(Integer.parseInt(data[2]));
     }
 
     @Override
-    public String[] List() {
-        return new String[0];
+    public String List() {
+        return db.list();
     }
 }

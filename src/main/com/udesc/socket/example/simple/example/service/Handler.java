@@ -1,29 +1,47 @@
 package com.udesc.socket.example.simple.example.service;
 
-import com.udesc.socket.example.simple.example.model.Professor;
-
 public class Handler {
 
     private PessoaService pessoaService;
 
     public Handler(int type) {
         switch (type) {
-            case PessoaService.ALUNO:
-                pessoaService = new AlunoService();
-            case PessoaService.PROFESSOR:
-                pessoaService = new ProfessorService();
-            default:
+            case PessoaService.ALUNO -> pessoaService = new AlunoService();
+            case PessoaService.PROFESSOR -> pessoaService = new ProfessorService();
+            default -> {
+            }
         }
     }
 
-    public boolean addPessoa(String[] data) {
+    public String AddPessoa(String[] data) {
         System.out.println("data 1 " + data[1]);
 
-        return pessoaService.Crete(data);
+        if (pessoaService.Crete(data)) {
+            return "Pessoa criada";
+        }
+        return "Error";
     }
 
-    public String getPessoa(String[] data) {
+    public String GetPessoa(String[] data) {
         return pessoaService.Get(data);
+    }
+
+    public String UpdatePessoa(String[] data) {
+        if (pessoaService.Update(data)) {
+            return "Pessoa atualizada";
+        }
+        return "Error";
+    }
+
+    public String DeletePessoa(String[] data) {
+        if (pessoaService.Delete(data)) {
+            return "Pessoa removida";
+        }
+        return "Error";
+    }
+
+    public String ListPessoas() {
+        return pessoaService.List();
     }
 
 }

@@ -1,6 +1,5 @@
 package com.udesc.socket.example.simple.example.database;
 
-import com.udesc.socket.example.simple.example.model.Aluno;
 import com.udesc.socket.example.simple.example.model.Professor;
 
 import java.util.ArrayList;
@@ -8,7 +7,10 @@ import java.util.Objects;
 
 public class ProfessorDB {
 
+    private static ProfessorDB professorDB;
     private ArrayList<Professor> professores = new ArrayList<>();
+
+    private ProfessorDB() {}
 
     public boolean Create(Professor professor) {
         return professores.add(professor);
@@ -28,13 +30,22 @@ public class ProfessorDB {
 
     public String Get(String cpf) {
         return professores.stream()
-                .filter(alu -> Objects.equals(alu.getCpf(), Integer.getInteger(cpf)))
+                .filter(alu -> Objects.equals(alu.getCpf(), Integer.parseInt(cpf)))
                 .findFirst()
                 .toString();
     }
 
-    public String[] list() {
-        return (String[]) professores.stream().map(Object::toString).toList().toArray();
+    public String List() {
+        return professores.stream().map(Object::toString).toList().toString();
+    }
+
+
+    public static ProfessorDB getInstance() {
+        if (professorDB == null) {
+            professorDB = new ProfessorDB();
+            return professorDB;
+        }
+        return professorDB;
     }
 
 }

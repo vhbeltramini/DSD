@@ -19,13 +19,13 @@ public abstract class PessoaService {
 
     protected abstract boolean Remove(String[] data);
 
-    public abstract String[] List();
+    public abstract String List();
 
     protected Pessoa formatPessoaData(int pessoaType, String[] data) {
         if (pessoaType == 0) {
-            return new Aluno(Integer.getInteger(data[2]), data[3], data[4]);
+            return new Aluno(Integer.parseInt(data[2]), data[3], data[4]);
         }
-        return new Professor(Integer.getInteger(data[2]), data[3], data[4]);
+        return new Professor(Integer.parseInt(data[2]), data[3], data[4]);
     }
 
 

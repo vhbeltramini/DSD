@@ -15,52 +15,30 @@ import java.util.Scanner;
 public class Client {
 
     public static void main(String argv[]) throws Exception {
+        while (true) {
+            String testResult;
 
-        String test = "teste";
-        String testResult;
-        String data;
-        Pessoa pessoa;
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Insira as informações");
+            testResult = scan.nextLine();
 
-        Scanner scan = new Scanner(System.in);
-//
-        System.out.println("Insira as informações");
-        testResult = scan.nextLine();
+            System.out.println("Creating connection");
+            try (Socket conn = new Socket("192.168.31.155", 80);) {
+                System.out.println("Connected");
+                InputStream inputStream = conn.getInputStream();
+                DataOutputStream outToServer = new DataOutputStream(conn.getOutputStream());
 
+                outToServer.writeBytes(testResult + '\n');
 
-
-//        int personType = Integer.parseInt(scan.nextLine());
-//        switch (personType) {
-//            case 1:
-//                pessoa = new Aluno();
-//            case 2:
-//                pessoa = new Professor();
-//            default:
-//                System.out.println("melhorar isso aqui");
-//        }
-//
-//        System.out.println("Nome da pessoa");
-//
-
-
-
-
-
-        System.out.println("Creating connection");
-        try (Socket conn = new Socket("192.168.31.155", 80);) {
-            System.out.println("Connected");
-            InputStream inputStream = conn.getInputStream();
-            DataOutputStream outToServer = new DataOutputStream(conn.getOutputStream());
-
-            outToServer.writeBytes(testResult + '\n');
-
-            BufferedReader inFromServer = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            testResult = inFromServer.readLine();
-            System.out.println(testResult);
-            conn.close();
-        } catch (UnknownHostException e) {
-            System.out.println("Host not founded");
-            e.printStackTrace();
+                BufferedReader inFromServer = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                System.out.println(inFromServer.readLine());
+            } catch (UnknownHostException e) {
+                System.out.println("Host not founded");
+                e.printStackTrace();
+            }
         }
+
+
 
     }
 

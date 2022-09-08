@@ -2,7 +2,6 @@ package com.udesc.socket.example.simple.example.service;
 
 import com.udesc.socket.example.simple.example.database.AlunoDB;
 import com.udesc.socket.example.simple.example.database.ProfessorDB;
-import com.udesc.socket.example.simple.example.model.Aluno;
 import com.udesc.socket.example.simple.example.model.Professor;
 
 public class ProfessorService extends PessoaService {
@@ -10,7 +9,7 @@ public class ProfessorService extends PessoaService {
     private ProfessorDB db;
 
     public ProfessorService() {
-        db = new ProfessorDB();
+        db = ProfessorDB.getInstance();
     }
 
     @Override
@@ -39,7 +38,7 @@ public class ProfessorService extends PessoaService {
     }
 
     @Override
-    public String[] List() {
-        return new String[0];
+    public String List() {
+        return db.List();
     }
 }

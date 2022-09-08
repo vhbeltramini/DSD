@@ -8,6 +8,14 @@ public class Aluno extends Pessoa {
 
     public Aluno() {
         super();
+    }
 
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "cpf=" + getCpf() +
+                ", nome='" + getNome() + '\'' +
+                ", endereco='" + getEndereco() + '\'' +
+                '}';
     }
 }

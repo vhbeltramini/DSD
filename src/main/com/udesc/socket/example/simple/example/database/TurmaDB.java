@@ -4,6 +4,7 @@ import com.udesc.socket.example.simple.example.model.Professor;
 import com.udesc.socket.example.simple.example.model.Turma;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TurmaDB {
 
@@ -17,8 +18,8 @@ public class TurmaDB {
         return turmas.remove(turma);
     }
 
-    public String[] list() {
-        return (String[]) turmas.stream().map(Object::toString).toList().toArray();
+    public String list() {
+        return Arrays.toString(turmas.stream().map(Object::toString).toList().toArray());
     }
 
 }
