@@ -28,9 +28,11 @@ public class Client {
                 InputStream inputStream = conn.getInputStream();
                 DataOutputStream outToServer = new DataOutputStream(conn.getOutputStream());
 
+                System.out.println(inputStream.read());
+
                 outToServer.writeBytes(testResult + '\n');
 
-                BufferedReader inFromServer = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                BufferedReader inFromServer = new BufferedReader(new InputStreamReader(inputStream));
                 System.out.println(inFromServer.readLine());
             } catch (UnknownHostException e) {
                 System.out.println("Host not founded");

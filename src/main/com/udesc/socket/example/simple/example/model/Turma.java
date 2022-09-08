@@ -23,4 +23,12 @@ public class Turma {
         this.pessoas.remove(pessoa);
     }
 
+    @Override
+    public String toString() {
+        return "Turma{" +
+                "disciplina='" + disciplina + '\'' +
+                ", creditos=" + creditos +
+                ", pessoas=" + pessoas.stream().map(Object::toString).toList() +
+                '}';
+    }
 }

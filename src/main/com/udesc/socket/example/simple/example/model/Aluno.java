@@ -2,12 +2,23 @@ package com.udesc.socket.example.simple.example.model;
 
 public class Aluno extends Pessoa {
 
-    public Aluno(Integer cpf, String nome, String endereco) {
+    private int fase;
+
+    public Aluno(Integer cpf, String nome, String endereco, int fase) {
         super(cpf, nome, endereco);
+        this.fase = fase;
     }
 
     public Aluno() {
         super();
+    }
+
+    public int getFase() {
+        return fase;
+    }
+
+    public void setFase(int fase) {
+        this.fase = fase;
     }
 
     @Override
@@ -16,6 +27,7 @@ public class Aluno extends Pessoa {
                 "cpf=" + getCpf() +
                 ", nome='" + getNome() + '\'' +
                 ", endereco='" + getEndereco() + '\'' +
+                ", fase='" + getFase() + '\'' +
                 '}';
     }
 }
