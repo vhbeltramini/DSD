@@ -42,6 +42,12 @@ public class ProfessorDB {
                 .collect(Collectors.joining(", "));
     }
 
+    public Professor getProfessor(String cpf){
+        return professores.stream()
+                .filter(prof -> Objects.equals(prof.getCpf(), Integer.parseInt(cpf)))
+                .findAny().get();
+    }
+
 
     public static ProfessorDB getInstance() {
         if (professorDB == null) {

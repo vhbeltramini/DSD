@@ -39,6 +39,12 @@ public class AlunoDB {
                 .collect(Collectors.joining(", "));
     }
 
+    public Aluno getAluno(String cpf){
+        return alunos.stream()
+                .filter(alu -> Objects.equals(alu.getCpf(), Integer.parseInt(cpf)))
+                .findAny().get();
+    }
+
     private AlunoDB() {
         alunos = new ArrayList<>();
     }

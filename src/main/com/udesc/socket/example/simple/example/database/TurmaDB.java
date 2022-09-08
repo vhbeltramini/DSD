@@ -1,5 +1,6 @@
 package com.udesc.socket.example.simple.example.database;
 
+import com.udesc.socket.example.simple.example.model.Aluno;
 import com.udesc.socket.example.simple.example.model.Turma;
 
 import java.util.ArrayList;
@@ -14,12 +15,8 @@ public class TurmaDB {
         turmas = new ArrayList<>();
     }
 
-    public boolean add(Turma turma) {
+    public boolean Create(Turma turma) {
         return turmas.add(turma);
-    }
-
-    public boolean remove(Turma turma) {
-        return turmas.remove(turma);
     }
 
     public String list() {
