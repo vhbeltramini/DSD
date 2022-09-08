@@ -4,10 +4,7 @@ import com.udesc.socket.example.simple.example.model.Aluno;
 import com.udesc.socket.example.simple.example.model.Pessoa;
 import com.udesc.socket.example.simple.example.model.Professor;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -33,8 +30,15 @@ public class Client {
 
                 outToServer.writeBytes(testResult + '\n');
 
-                BufferedReader inFromServer = new BufferedReader(new InputStreamReader(inputStream));
-                System.out.println(inFromServer.readLine());
+//                BufferedReader inFromServer = new BufferedReader(new InputStreamReader(inputStream));
+//                System.out.println(inFromServer.readLine());
+
+
+                ObjectInputStream in = new ObjectInputStream(conn.getInputStream());
+                String response = (String) in.readObject();
+
+//                String response = new BufferedReader(new InputStreamReader(inputStream)).readLine();
+                System.out.println("Response " + response);
 
 
 //                byte[] dataBytes = new byte[1024];
