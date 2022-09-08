@@ -19,8 +19,8 @@ public abstract class PessoaService {
 
     public abstract String List();
 
-    protected Pessoa formatPessoaData(int pessoaType, String[] data) {
-        if (pessoaType == 0) {
+    protected Pessoa formatPessoaData(String pessoaType, String[] data) {
+        if (pessoaType.equals(ALUNO)) {
             return new Aluno(Integer.parseInt(data[2]), data[3], data[4], Integer.parseInt(data[5]));
         }
         return new Professor(Integer.parseInt(data[2]), data[3], data[4], data[5]);
