@@ -41,7 +41,7 @@ public class Client {
                     ObjectInputStream in = new ObjectInputStream(conn.getInputStream());
                     String response = (String) in.readObject();
 
-                    System.out.println("Response " + response);
+                    System.out.println("Response received: " + response);
             } catch (UnknownHostException e) {
                     System.out.println("Host not founded");
                     e.printStackTrace();

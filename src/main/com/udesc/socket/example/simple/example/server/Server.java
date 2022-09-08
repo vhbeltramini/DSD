@@ -33,12 +33,8 @@ public class Server {
             String response = handlerCrud(data);
 
             System.out.println("Received: " + response);
-//            outToClient.writeBytes(response);
-
-//            OutputStream outputStream = connectionSocket.getOutputStream();
 
             out.writeObject(response);
-
         }
     }
 
