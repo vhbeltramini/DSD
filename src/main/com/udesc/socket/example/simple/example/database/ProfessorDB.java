@@ -16,6 +16,9 @@ public class ProfessorDB {
     }
 
     public boolean Create(Professor professor) {
+        if (professores.stream().anyMatch(p -> p.getCpf().equals(professor.getCpf()))) {
+            return false;
+        }
         return professores.add(professor);
     }
 
@@ -37,17 +40,19 @@ public class ProfessorDB {
                 .toString();
     }
 
+    public Professor GetProfessor(String cpf) {
+        if (professores.stream().anyMatch(professor -> professor.getCpf().equals(Integer.parseInt(cpf)))) {
+            return professores.stream()
+                    .filter(professor -> Objects.equals(professor.getCpf(), Integer.parseInt(cpf)))
+                    .findAny().get();
+        }
+        return null;
+    }
+
     public String List() {
         return professores.stream().map(Object::toString)
                 .collect(Collectors.joining(", "));
     }
-
-    public Professor getProfessor(String cpf){
-        return professores.stream()
-                .filter(prof -> Objects.equals(prof.getCpf(), Integer.parseInt(cpf)))
-                .findAny().get();
-    }
-
 
     public static ProfessorDB getInstance() {
         if (professorDB == null) {

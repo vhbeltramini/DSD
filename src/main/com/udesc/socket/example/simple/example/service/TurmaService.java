@@ -8,6 +8,7 @@ import com.udesc.socket.example.simple.example.model.Turma;
 
 public class TurmaService {
 
+    public static final String TURMA = "TURMA";
     private TurmaDB db;
     private ProfessorDB professorDB;
     private AlunoDB alunoDB;
@@ -22,19 +23,47 @@ public class TurmaService {
         return db.Create(formatTurmaData(data));
     }
 
+    protected boolean Delete(String[] data){
+        return db.Delete(data[2]);
+    }
+
+
+    protected String Get(String[] data){
+        return db.Get(data[2]);
+    }
+
+    protected boolean AddPessoaTurma(String[] data){
+        Pessoa pessoa = getPessoa(data);
+        if (pessoa == null) return false;
+        return db.AddPessoaTurma(data[2], pessoa);
+    }
+
+    protected boolean RemovePessoaTurma(String[] data){
+        Pessoa pessoa = getPessoa(data);
+        if (pessoa == null) return false;
+
+        return db.RemovePessoaTurma(data[2], pessoa);
+    }
+
+    private Pessoa getPessoa(String[] data) {
+        Pessoa pessoa;
+        if (alunoDB.getAluno(data[3]) != null) {
+            pessoa = alunoDB.getAluno(data[3]);
+        } else if (professorDB.GetProfessor(data[3]) != null){
+            pessoa = professorDB.GetProfessor(data[3]);
+        } else {
+            return null;
+        }
+        return pessoa;
+    }
+
+
     protected String List(){
-        return db.list();
+        return db.List();
     }
 
     protected Turma formatTurmaData(String[] data){
-        return new Turma(data[1], Integer.parseInt(data[2]));
+        return new Turma(data[2], Integer.parseInt(data[3]));
     }
 
-    protected boolean addPessoa(String cpf){
-        Pessoa pessoa = alunoDB.getAluno(cpf);
-        if(pessoa == null){
-            pessoa = professorDB.getProfessor(cpf);
-        }
-        return pessoa != null;
-    }
 }

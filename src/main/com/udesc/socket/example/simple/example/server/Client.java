@@ -12,48 +12,46 @@ import java.util.Scanner;
 public class Client {
 
     public static void main(String argv[]) throws Exception {
-        while (true) {
-            String testResult;
-            int readedBytes;
 
-            Scanner scan = new Scanner(System.in);
-            System.out.println("Insira as informações");
-            testResult = scan.nextLine();
+        Scanner scan = new Scanner(System.in);
+        String ipConfig;
 
-            System.out.println("Creating connection");
-            try (Socket conn = new Socket("192.168.31.155", 80);) {
-                System.out.println("Connected");
-                InputStream inputStream = conn.getInputStream();
-                DataOutputStream outToServer = new DataOutputStream(conn.getOutputStream());
+        System.out.println("Insira o ip do servidor");
+        ipConfig = scan.nextLine();
 
-//                System.out.println(inputStream.read());
+        String inputData;
 
-                outToServer.writeBytes(testResult + '\n');
-
-//                BufferedReader inFromServer = new BufferedReader(new InputStreamReader(inputStream));
-//                System.out.println(inFromServer.readLine());
+        System.out.println("Creating connection");
 
 
-                ObjectInputStream in = new ObjectInputStream(conn.getInputStream());
-                String response = (String) in.readObject();
+            System.out.println("Connected");
+            while (true) {
+                try (Socket conn = new Socket(ipConfig, 80);) {
 
-//                String response = new BufferedReader(new InputStreamReader(inputStream)).readLine();
-                System.out.println("Response " + response);
+//                    InputStream inputStream = conn.getInputStream();
+                    System.out.println("");
+                    System.out.println("Insira as informações");
+                    inputData = scan.nextLine();
+
+                    DataOutputStream outToServer = new DataOutputStream(conn.getOutputStream());
 
 
-//                byte[] dataBytes = new byte[1024];
-//                readedBytes = inputStream.read(dataBytes);
-//                while (readedBytes >= 0) {
-//                    String dataString = new String(dataBytes, 0, readedBytes);
-//                    System.out.println(dataString);
-//                    readedBytes = inputStream.read(dataBytes);
-//                }
+                    outToServer.writeBytes(inputData + '\n');
 
+                    ObjectInputStream in = new ObjectInputStream(conn.getInputStream());
+                    String response = (String) in.readObject();
+
+                    System.out.println("Response " + response);
             } catch (UnknownHostException e) {
-                System.out.println("Host not founded");
-                e.printStackTrace();
+                    System.out.println("Host not founded");
+                    e.printStackTrace();
+
             }
-        }
+
+
+
+
+            }
 
 
 

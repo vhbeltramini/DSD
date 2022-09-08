@@ -12,6 +12,9 @@ public class AlunoDB {
     private ArrayList<Aluno> alunos;
 
     public boolean Create(Aluno aluno) {
+        if (alunos.stream().anyMatch(a -> a.getCpf().equals(aluno.getCpf()))) {
+            return false;
+        }
         return alunos.add(aluno);
     }
 
@@ -40,9 +43,12 @@ public class AlunoDB {
     }
 
     public Aluno getAluno(String cpf){
-        return alunos.stream()
-                .filter(alu -> Objects.equals(alu.getCpf(), Integer.parseInt(cpf)))
-                .findAny().get();
+        if (alunos.stream().anyMatch(aluno -> aluno.getCpf().equals(Integer.parseInt(cpf)))) {
+            return alunos.stream()
+                    .filter(alu -> Objects.equals(alu.getCpf(), Integer.parseInt(cpf)))
+                    .findAny().get();
+        }
+        return null;
     }
 
     private AlunoDB() {

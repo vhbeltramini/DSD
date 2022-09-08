@@ -20,7 +20,7 @@ public class ProfessorService extends PessoaService {
 
     @Override
     protected String Get(String[] data) {
-        return db.Get(data[2]);
+        return db.Get(data[2]).toString();
     }
 
     @Override

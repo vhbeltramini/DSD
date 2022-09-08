@@ -6,8 +6,8 @@ import com.udesc.socket.example.simple.example.model.Professor;
 
 public abstract class PessoaService {
 
-    public static final int PROFESSOR = 1;
-    public static final int ALUNO = 0;
+    public static final String PROFESSOR = "PROFESSOR";
+    public static final String ALUNO = "ALUNO";
 
     protected abstract boolean Create(String[] data);
 

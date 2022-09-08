@@ -1,11 +1,13 @@
 package com.udesc.socket.example.simple.example.server;
 
 import com.udesc.socket.example.simple.example.service.Handler;
+import com.udesc.socket.example.simple.example.service.PessoaService;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Server {
 
@@ -40,7 +42,14 @@ public class Server {
     }
 
     private static String handlerCrud(String[] data) {
-        Handler handler = new Handler(Integer.parseInt(data[1]));
+        if (Objects.equals(data[1], PessoaService.ALUNO) || Objects.equals(data[1], PessoaService.PROFESSOR)) {
+            return handlerPessoa(data);
+        }
+        return handlerTurma(data);
+    }
+
+    private static String handlerPessoa(String[] data) {
+        Handler handler = new Handler(data[1]);
 
         System.out.println("data:" + Arrays.toString(data));
 
@@ -55,6 +64,30 @@ public class Server {
                 return handler.DeletePessoa(data);
             case "LIST":
                 return handler.ListPessoas();
+            default:
+                return "Not implemented";
+        }
+    }
+    private static String handlerTurma(String[] data) {
+        Handler handler = new Handler(data[1]);
+
+        System.out.println("data:" + Arrays.toString(data));
+
+        switch (data[0]) {
+            case "INSERT":
+                return handler.CreateTurma(data);
+            case "GET":
+                return handler.GetTurma(data);
+//            case "UPDATE":
+//                return handler.UpdatePessoa(data);
+            case "DELETE":
+                return handler.DeleteTurma(data);
+            case "LIST":
+                return handler.ListTurma();
+            case "INSERTP":
+                return handler.AddPessoaTurma(data);
+            case "DELETEP":
+                return handler.RemovePessoaTurma(data);
             default:
                 return "Not implemented";
         }
