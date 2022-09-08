@@ -17,6 +17,7 @@ public class Client {
     public static void main(String argv[]) throws Exception {
         while (true) {
             String testResult;
+            int readedBytes;
 
             Scanner scan = new Scanner(System.in);
             System.out.println("Insira as informações");
@@ -28,12 +29,22 @@ public class Client {
                 InputStream inputStream = conn.getInputStream();
                 DataOutputStream outToServer = new DataOutputStream(conn.getOutputStream());
 
-                System.out.println(inputStream.read());
+//                System.out.println(inputStream.read());
 
                 outToServer.writeBytes(testResult + '\n');
 
                 BufferedReader inFromServer = new BufferedReader(new InputStreamReader(inputStream));
                 System.out.println(inFromServer.readLine());
+
+
+//                byte[] dataBytes = new byte[1024];
+//                readedBytes = inputStream.read(dataBytes);
+//                while (readedBytes >= 0) {
+//                    String dataString = new String(dataBytes, 0, readedBytes);
+//                    System.out.println(dataString);
+//                    readedBytes = inputStream.read(dataBytes);
+//                }
+
             } catch (UnknownHostException e) {
                 System.out.println("Host not founded");
                 e.printStackTrace();

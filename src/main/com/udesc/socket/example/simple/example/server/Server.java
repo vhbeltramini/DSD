@@ -29,6 +29,11 @@ public class Server {
 
             System.out.println("Received: " + response);
             outToClient.writeBytes(response);
+
+            OutputStream outputStream = connectionSocket.getOutputStream();
+
+            outputStream.write(response.getBytes());
+
         }
     }
 
@@ -37,13 +42,19 @@ public class Server {
 
         System.out.println("data:" + Arrays.toString(data));
 
-        return switch (data[0]) {
-            case "INSERT" -> handler.AddPessoa(data);
-            case "GET" -> handler.GetPessoa(data);
-            case "UPDATE" -> handler.UpdatePessoa(data);
-            case "DELETE" -> handler.DeletePessoa(data);
-            case "LIST" -> handler.ListPessoas();
-            default -> "Not implemented";
-        };
+        switch (data[0]) {
+            case "INSERT":
+                return handler.AddPessoa(data);
+            case "GET":
+                return handler.GetPessoa(data);
+            case "UPDATE":
+                return handler.UpdatePessoa(data);
+            case "DELETE":
+                return handler.DeletePessoa(data);
+            case "LIST":
+                return handler.ListPessoas();
+            default:
+                return "Not implemented";
+        }
     }
 }

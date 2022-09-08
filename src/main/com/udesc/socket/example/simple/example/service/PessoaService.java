@@ -25,7 +25,7 @@ public abstract class PessoaService {
         if (pessoaType == 0) {
             return new Aluno(Integer.parseInt(data[2]), data[3], data[4], Integer.parseInt(data[5]));
         }
-        return new Professor(Integer.parseInt(data[2]), data[3], data[4]);
+        return new Professor(Integer.parseInt(data[2]), data[3], data[4], data[5]);
     }
 
 

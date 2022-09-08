@@ -6,10 +6,14 @@ public class Handler {
 
     public Handler(int type) {
         switch (type) {
-            case PessoaService.ALUNO -> pessoaService = new AlunoService();
-            case PessoaService.PROFESSOR -> pessoaService = new ProfessorService();
-            default -> {
-            }
+            case PessoaService.ALUNO:
+                pessoaService = new AlunoService();
+                break;
+            case PessoaService.PROFESSOR:
+                pessoaService = new ProfessorService();
+                break;
+            default:
+
         }
     }
 
