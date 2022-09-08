@@ -2,6 +2,7 @@ package com.udesc.socket.example.simple.example.service;
 
 import com.udesc.socket.example.simple.example.database.AlunoDB;
 import com.udesc.socket.example.simple.example.database.ProfessorDB;
+import com.udesc.socket.example.simple.example.model.Aluno;
 import com.udesc.socket.example.simple.example.model.Professor;
 
 public class ProfessorService extends PessoaService {
@@ -13,7 +14,7 @@ public class ProfessorService extends PessoaService {
     }
 
     @Override
-    protected boolean Crete(String[] data) {
+    protected boolean Create(String[] data) {
         return db.Create((Professor) formatPessoaData(PROFESSOR, data));
     }
 
@@ -24,12 +25,12 @@ public class ProfessorService extends PessoaService {
 
     @Override
     protected boolean Delete(String[] data) {
-        return false;
+        return db.Delete(Integer.parseInt(data[2]));
     }
 
     @Override
     protected boolean Update(String[] data) {
-        return false;
+        return db.Update((Professor) formatPessoaData(PROFESSOR, data));
     }
 
     @Override

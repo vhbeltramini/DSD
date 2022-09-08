@@ -20,7 +20,7 @@ public class Handler {
     public String AddPessoa(String[] data) {
         System.out.println("data 1 " + data[1]);
 
-        if (pessoaService.Crete(data)) {
+        if (pessoaService.Create(data)) {
             return "Pessoa criada";
         }
         return "Error";
