@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class AlunoDB {
 
     private static AlunoDB alunoDB;
-    private ArrayList<Aluno> alunos = new ArrayList<>();
+    private ArrayList<Aluno> alunos;
 
     public boolean Create(Aluno aluno) {
         return alunos.add(aluno);
@@ -40,7 +40,7 @@ public class AlunoDB {
     }
 
     private AlunoDB() {
-
+        alunos = new ArrayList<>();
     }
 
     public static AlunoDB getInstance() {

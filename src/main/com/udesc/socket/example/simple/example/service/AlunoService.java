@@ -12,7 +12,7 @@ public class AlunoService extends PessoaService {
     }
 
     @Override
-    protected boolean Crete(String[] data) {
+    protected boolean Create(String[] data) {
         return db.Create((Aluno) formatPessoaData(ALUNO, data));
     }
 

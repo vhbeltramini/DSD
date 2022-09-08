@@ -4,27 +4,29 @@ import com.udesc.socket.example.simple.example.model.Professor;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ProfessorDB {
 
     private static ProfessorDB professorDB;
-    private ArrayList<Professor> professores = new ArrayList<>();
+    private ArrayList<Professor> professores;
 
-    private ProfessorDB() {}
+    private ProfessorDB() {
+        professores = new ArrayList<>();
+    }
 
     public boolean Create(Professor professor) {
         return professores.add(professor);
     }
 
-    public boolean Delete(Professor professor) {
-        return professores.remove(professor);
+    public boolean Delete(int cpf) {
+        return professores.removeIf(professor -> professor.getCpf().equals(cpf));
     }
 
     public boolean Update(Professor professor) {
-        if (professores.removeIf(alu -> alu.getCpf().equals(professor.getCpf()))) {
+        if (professores.removeIf(prof -> prof.getCpf().equals(professor.getCpf()))) {
             return professores.add(professor);
         }
-
         return false;
     }
 
@@ -36,7 +38,8 @@ public class ProfessorDB {
     }
 
     public String List() {
-        return professores.stream().map(Object::toString).toList().toString();
+        return professores.stream().map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 
 
