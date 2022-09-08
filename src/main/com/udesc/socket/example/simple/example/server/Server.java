@@ -27,10 +27,8 @@ public class Server {
 
             String response = handlerCrud(data);
 
-
             System.out.println("Received: " + response);
-            capitalizedSentence = clientSentence.toUpperCase() + '\n';
-            outToClient.writeBytes(capitalizedSentence);
+            outToClient.writeBytes(response);
         }
     }
 
