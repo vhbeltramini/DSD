@@ -21,6 +21,8 @@ public class Server {
             Socket connectionSocket = server.accept();
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
             DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+            ObjectOutputStream out = new ObjectOutputStream(connectionSocket.getOutputStream());
+
             clientSentence = inFromClient.readLine();
 
             String[] data = clientSentence.split(";");
@@ -28,11 +30,11 @@ public class Server {
             String response = handlerCrud(data);
 
             System.out.println("Received: " + response);
-            outToClient.writeBytes(response);
+//            outToClient.writeBytes(response);
 
-            OutputStream outputStream = connectionSocket.getOutputStream();
+//            OutputStream outputStream = connectionSocket.getOutputStream();
 
-            outputStream.write(response.getBytes());
+            out.writeObject(response);
 
         }
     }
