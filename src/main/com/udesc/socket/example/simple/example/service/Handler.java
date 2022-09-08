@@ -27,21 +27,25 @@ public class Handler {
     }
 
     public String GetPessoa(String[] data) {
-        return pessoaService.Get(data);
+        try {
+            return pessoaService.Get(data);
+        }catch (Exception e){
+            return "Pessoa nao encontrada";
+        }
     }
 
     public String UpdatePessoa(String[] data) {
         if (pessoaService.Update(data)) {
             return "Pessoa atualizada";
         }
-        return "Error";
+        return "Pessoa nao encontrada";
     }
 
     public String DeletePessoa(String[] data) {
         if (pessoaService.Delete(data)) {
             return "Pessoa removida";
         }
-        return "Error";
+        return "Pessoa nao encontrada";
     }
 
     public String ListPessoas() {
