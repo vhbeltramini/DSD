@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Server {
@@ -42,18 +43,19 @@ public class Server {
     }
 
     private static String handlerCrud(String[] data) {
-        if (Objects.equals(data[1], PessoaService.ALUNO) || Objects.equals(data[1], PessoaService.PROFESSOR)) {
+        String dataType = data[1].toUpperCase();
+        if (Objects.equals(dataType, PessoaService.ALUNO) || Objects.equals(dataType, PessoaService.PROFESSOR)) {
             return handlerPessoa(data);
         }
         return handlerTurma(data);
     }
 
     private static String handlerPessoa(String[] data) {
-        Handler handler = new Handler(data[1]);
+        Handler handler = new Handler(data[1].toUpperCase());
 
         System.out.println("data:" + Arrays.toString(data));
 
-        switch (data[0]) {
+        switch (data[0].toUpperCase()) {
             case "INSERT":
                 return handler.AddPessoa(data);
             case "GET":
@@ -69,11 +71,11 @@ public class Server {
         }
     }
     private static String handlerTurma(String[] data) {
-        Handler handler = new Handler(data[1]);
+        Handler handler = new Handler(data[1].toUpperCase());
 
         System.out.println("data:" + Arrays.toString(data));
 
-        switch (data[0]) {
+        switch (data[0].toUpperCase()) {
             case "INSERT":
                 return handler.CreateTurma(data);
             case "GET":
