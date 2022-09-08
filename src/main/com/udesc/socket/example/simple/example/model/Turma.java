@@ -2,6 +2,7 @@ package com.udesc.socket.example.simple.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Turma {
 
@@ -48,7 +49,7 @@ public class Turma {
         return "Turma{" +
                 "disciplina='" + disciplina + '\'' +
                 ", creditos=" + creditos +
-                ", pessoas=" + pessoas.stream().map(Object::toString).toList() +
+                ", pessoas=" + pessoas.stream().map(Object::toString).collect(Collectors.toList()) +
                 '}';
     }
 }
