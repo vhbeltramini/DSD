@@ -17,8 +17,6 @@ public abstract class PessoaService {
 
     protected abstract boolean Update(String[] data);
 
-    protected abstract boolean Remove(String[] data);
-
     public abstract String List();
 
     protected Pessoa formatPessoaData(int pessoaType, String[] data) {

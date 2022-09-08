@@ -33,11 +33,6 @@ public class ProfessorService extends PessoaService {
     }
 
     @Override
-    protected boolean Remove(String[] data) {
-        return false;
-    }
-
-    @Override
     public String List() {
         return db.List();
     }

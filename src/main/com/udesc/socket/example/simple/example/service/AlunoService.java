@@ -32,11 +32,6 @@ public class AlunoService extends PessoaService {
     }
 
     @Override
-    protected boolean Remove(String[] data) {
-        return db.Remove(Integer.parseInt(data[2]));
-    }
-
-    @Override
     public String List() {
         return db.list();
     }
