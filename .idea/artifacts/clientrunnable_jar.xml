@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="clientrunnable:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/clientrunnable_jar</output-path>
+    <root id="archive" name="DSD.jar">
+      <element id="module-output" name="DSD" />
+    </root>
+  </artifact>
+</component>

@@ -1,7 +1,9 @@
 package com.udesc.socket.example.simple.example.server;
 
+import com.udesc.socket.example.simple.example.model.Turma;
 import com.udesc.socket.example.simple.example.service.Handler;
 import com.udesc.socket.example.simple.example.service.PessoaService;
+import com.udesc.socket.example.simple.example.service.TurmaService;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -19,31 +21,41 @@ public class Server {
         String clientSentence;
         String capitalizedSentence;
         while (true) {
-            System.out.println("Waiting for connection");
+            try {
+                System.out.println("Waiting for connection");
 
-            Socket connectionSocket = server.accept();
-            BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
-            DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-            ObjectOutputStream out = new ObjectOutputStream(connectionSocket.getOutputStream());
+                Socket connectionSocket = server.accept();
+                BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+                DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+                ObjectOutputStream out = new ObjectOutputStream(connectionSocket.getOutputStream());
 
-            clientSentence = inFromClient.readLine();
+                clientSentence = inFromClient.readLine();
 
-            String[] data = clientSentence.split(";");
+                String[] data = clientSentence.split(";");
 
-            String response = handlerCrud(data);
+                String response = handlerCrud(data);
 
-            System.out.println("Received: " + response);
+                System.out.println("Received: " + response);
 
-            out.writeObject(response);
+                out.writeObject(response);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
         }
     }
 
     private static String handlerCrud(String[] data) {
+        if (data.length <= 1) {
+            return "Invalid command";
+        }
         String dataType = data[1].toUpperCase();
         if (Objects.equals(dataType, PessoaService.ALUNO) || Objects.equals(dataType, PessoaService.PROFESSOR)) {
             return handlerPessoa(data);
+        } else if (Objects.equals(dataType, TurmaService.TURMA)) {
+            return handlerTurma(data);
         }
-        return handlerTurma(data);
+        return "Invalid command";
     }
 
     private static String handlerPessoa(String[] data) {
